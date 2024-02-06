@@ -4,6 +4,8 @@ UF23 Galactic Magnetic Field Models
 C++ implementation of Galactic Magnetic Field models from the paper [The Coherent Magnetic Field of the Milky Way](https://arxiv.org/abs/2311.12120) by [Michael Unger](mailto:michael.unger@kit.edu) and [Glennys R. Farrar](mailto:gf25@nyu.edu).
 
 
+Download latest release on zenodo: [![DOI](https://zenodo.org/badge/753818568.svg)](https://zenodo.org/doi/10.5281/zenodo.10627090)
+
 ## License
 
 Released under BSD 2-Clause "Simplified" License.
