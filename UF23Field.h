@@ -4,7 +4,7 @@
  @class UF23Field
  @brief UF23Field Galactic magnetic field model
 
- Implements the six coherent magnetic field models of UF23
+ Implements the eight coherent magnetic field models of UF23
  See: M. Unger and G.R. Farrar, arXiv:2311.12120
 
  Assumes a galactocentric coordinate system with the Galactic center
