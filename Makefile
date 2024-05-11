@@ -1,17 +1,17 @@
-CC := g++
-CFLAGS := -std=c++11 -Wall -Wextra -pedantic -O3
-TARGET := uf23Field
+CXX := g++
+CXXFLAGS := -std=c++11 -Wall -Wextra -pedantic -O3
 
+EXE := $(patsubst %.cxx, %, $(wildcard *.cxx))
 SRCS := $(wildcard *.cc)
 OBJS := $(patsubst %.cc,%.o,$(SRCS))
 
-all: $(TARGET)
+all: $(EXE)
 
-$(TARGET): $(OBJS)
-	$(CC) -o $@ $^
+%: %.cxx
+	$(CXX) -o $@ $^ $(CXXFLAGS) $(OBJS)
 
 %.o: %.cc
-	$(CC) $(CFLAGS) -c $<
+	$(CXX) $(CXXFLAGS) -c $<
 
 clean:
 	rm -rf $(TARGET) *.o
