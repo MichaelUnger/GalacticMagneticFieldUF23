@@ -32,7 +32,7 @@ public:
 
 public:
   /**
-     @brief constructir
+     @brief constructor
      @param mt model type  (see Tab.2 of UF23 paper)
      @param maxRadiusInKpc maximum radius of field in kpc
   */
@@ -54,36 +54,68 @@ private:
   const double fMaxRadiusSquared;
 
   /// model parameters, see Table 3 of UF23 paper
-  double fDiskB1 = 0;
-  double fDiskB2 = 0;
-  double fDiskB3 = 0;
-  double fDiskH = 0;
-  double fDiskPhase1 = 0;
-  double fDiskPhase2 = 0;
-  double fDiskPhase3 = 0;
-  double fDiskPitch = 0;
-  double fDiskW = 0;
-  double fPoloidalA = 0;
-  double fPoloidalB = 0;
-  double fPoloidalP = 0;
-  double fPoloidalR = 0;
-  double fPoloidalW = 0;
-  double fPoloidalZ = 0;
-  double fSpurCenter = 0;
-  double fSpurLength = 0;
-  double fSpurWidth = 0;
-  double fStriation = 0;
-  double fToroidalBN = 0;
-  double fToroidalBS = 0;
-  double fToroidalR = 0;
-  double fToroidalW = 0;
-  double fToroidalZ = 0;
-  double fTwistingTime = 0;
+  enum EPar {
+    eDiskB1 = 0,
+    eDiskB2,
+    eDiskB3,
+    eDiskH,
+    eDiskPhase1,
+    eDiskPhase2,
+    eDiskPhase3,
+    eDiskPitch,
+    eDiskW,
+    ePoloidalA,
+    ePoloidalB,
+    ePoloidalP,
+    ePoloidalR,
+    ePoloidalW,
+    ePoloidalZ,
+    eSpurCenter,
+    eSpurLength,
+    eSpurWidth,
+    eStriation,
+    eToroidalBN,
+    eToroidalBS,
+    eToroidalR,
+    eToroidalW,
+    eToroidalZ,
+    eTwistingTime,
+    eNpar
+  };
+
+  // parameters are stored in array
+  double fParameters[eNpar] = { 0 };
+  // references to parameters for convience
+  double& fDiskB1       = fParameters[eDiskB1];
+  double& fDiskB2       = fParameters[eDiskB2];
+  double& fDiskB3       = fParameters[eDiskB3];
+  double& fDiskH        = fParameters[eDiskH];
+  double& fDiskPhase1   = fParameters[eDiskPhase1];
+  double& fDiskPhase2   = fParameters[eDiskPhase2];
+  double& fDiskPhase3   = fParameters[eDiskPhase3];
+  double& fDiskPitch    = fParameters[eDiskPitch];
+  double& fDiskW        = fParameters[eDiskW];
+  double& fPoloidalA    = fParameters[ePoloidalA];
+  double& fPoloidalB    = fParameters[ePoloidalB];
+  double& fPoloidalP    = fParameters[ePoloidalP];
+  double& fPoloidalR    = fParameters[ePoloidalR];
+  double& fPoloidalW    = fParameters[ePoloidalW];
+  double& fPoloidalZ    = fParameters[ePoloidalZ];
+  double& fSpurCenter   = fParameters[eSpurCenter];
+  double& fSpurLength   = fParameters[eSpurLength];
+  double& fSpurWidth    = fParameters[eSpurWidth];
+  double& fStriation    = fParameters[eStriation];
+  double& fToroidalBN   = fParameters[eToroidalBN];
+  double& fToroidalBS   = fParameters[eToroidalBS];
+  double& fToroidalR    = fParameters[eToroidalR];
+  double& fToroidalW    = fParameters[eToroidalW];
+  double& fToroidalZ    = fParameters[eToroidalZ];
+  double& fTwistingTime = fParameters[eTwistingTime];
 
   // some pre-calculated derived parameter values
-  double fSinPitch = 0;
-  double fCosPitch = 0;
-  double fTanPitch = 0;
+  double fSinPitch  = 0;
+  double fCosPitch  = 0;
+  double fTanPitch  = 0;
 
   /// major field components
   Vector3 GetDiskField(const Vector3& pos) const;

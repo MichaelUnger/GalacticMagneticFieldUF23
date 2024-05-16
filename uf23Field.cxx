@@ -1,4 +1,4 @@
-/** @file Main.cc
+/** @file uf23Field.cxx
 
  @brief  example program to calculate the coherent Galactic magnetic field
  @return an integer 0 upon success

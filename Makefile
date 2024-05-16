@@ -7,13 +7,17 @@ OBJS := $(patsubst %.cc,%.o,$(SRCS))
 
 all: $(EXE)
 
-%: %.cxx
-	$(CXX) -o $@ $^ $(CXXFLAGS) $(OBJS)
+%: %.cxx $(OBJS)
+	$(CXX) -o $@ $^ $(CXXFLAGS)
 
 %.o: %.cc
 	$(CXX) $(CXXFLAGS) -c $<
 
-clean:
-	rm -rf $(TARGET) *.o
+test: testUF23Field
+	./testUF23Field
 
+clean:
+	rm -rf $(EXE) *.o
+
+.PRECIOUS: %.o
 .PHONY: all clean

@@ -61,6 +61,7 @@ main(const int /*argc*/, const char** /*argv*/)
       }
     }
   }
+  cout << " ==> test of UF23Field successful " << endl;
   return 0;
 }
 

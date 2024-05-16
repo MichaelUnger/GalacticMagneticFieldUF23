@@ -64,7 +64,6 @@ UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
 
   switch (fModelType) {
     // ---------------------------------------------
-    //UF23/OutputFinal/uf23_base.root
   case base: {
     fDiskB1        =  1.0878565e+00 * microgauss;
     fDiskB2        =  2.6605034e+00 * microgauss;
@@ -90,7 +89,6 @@ UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
   }
   case cre10: {
     // ---------------------------------------------
-    //UF23/OutputFinal/uf23_cre.root
     fDiskB1        =  1.2035697e+00 * microgauss;
     fDiskB2        =  2.7478490e+00 * microgauss;
     fDiskB3        =  3.2104342e+00 * microgauss;
@@ -115,7 +113,6 @@ UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
   }
   case nebCor: {
     // ---------------------------------------------
-    //UF23/OutputFinal/uf23_kappa.root
     fDiskB1        =  1.4081935e+00 * microgauss;
     fDiskB2        =  3.5292400e+00 * microgauss;
     fDiskB3        =  4.1290147e+00 * microgauss;
@@ -140,7 +137,6 @@ UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
   }
   case neCL: {
     // ---------------------------------------------
-    //UF23/OutputFinal/uf23_ne.root
     fDiskB1        =  1.4259645e+00 * microgauss;
     fDiskB2        =  1.3543223e+00 * microgauss;
     fDiskB3        =  3.4390669e+00 * microgauss;
@@ -165,7 +161,6 @@ UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
   }
   case spur: {
     // ---------------------------------------------
-    //UF23/OutputFinal/uf23_spur.root
     fDiskB1        = -4.2993328e+00 * microgauss;
     fDiskH         =  7.5019749e-01 * kpc;
     fDiskPhase1    =  1.5589875e+02 * degree;
@@ -189,7 +184,6 @@ UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
   }
   case synCG: {
     // ---------------------------------------------
-    //UF23/OutputFinal/uf23_syn.root
     fDiskB1        =  8.1386878e-01 * microgauss;
     fDiskB2        =  2.0586930e+00 * microgauss;
     fDiskB3        =  2.9437335e+00 * microgauss;
@@ -214,7 +208,6 @@ UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
   }
   case twistX: {
     // ---------------------------------------------
-    //UF23/OutputFinal/uf23_twist.root
     fDiskB1        =  1.3741995e+00 * microgauss;
     fDiskB2        =  2.0089881e+00 * microgauss;
     fDiskB3        =  1.5212463e+00 * microgauss;
@@ -235,7 +228,6 @@ UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
   }
   case expX: {
     // ---------------------------------------------
-    //UF23/OutputFinal/uf23_xr.root
     fDiskB1        =  9.9258148e-01 * microgauss;
     fDiskB2        =  2.1821124e+00 * microgauss;
     fDiskB3        =  3.1197345e+00 * microgauss;
