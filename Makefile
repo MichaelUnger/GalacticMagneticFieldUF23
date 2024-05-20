@@ -13,8 +13,9 @@ all: $(EXE)
 %.o: %.cc
 	$(CXX) $(CXXFLAGS) -c $<
 
-test: testUF23Field
+test: testUF23Field testCovariance
 	./testUF23Field
+	./testCovariance
 
 clean:
 	rm -rf $(EXE) *.o

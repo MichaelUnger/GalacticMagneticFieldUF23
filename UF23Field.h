@@ -1,5 +1,5 @@
-#ifndef _UF23FIELD_H_
-#define _UF23FIELD_H_
+#ifndef _UF23Field_h_
+#define _UF23Field_h_
 /**
  @class UF23Field
  @brief UF23Field Galactic magnetic field model
@@ -30,29 +30,6 @@ public:
     nebCor
   };
 
-public:
-  /**
-     @brief constructor
-     @param mt model type  (see Tab.2 of UF23 paper)
-     @param maxRadiusInKpc maximum radius of field in kpc
-  */
-  UF23Field(const ModelType mt, const double maxRadiusInKpc = 30);
-  /// no default constructor
-  UF23Field() = delete;
-  /**
-     @brief calculate coherent magnetic field at a given position
-     @param posInKpc position with components given in kpc
-     @return coherent field in microgauss
-  */
-  Vector3 operator()(const Vector3& posInKpc) const;
-
-private:
-
-  /// model type given in constructor
-  const ModelType fModelType;
-  /// maximum galacto-centric radius beyond which B=0
-  const double fMaxRadiusSquared;
-
   /// model parameters, see Table 3 of UF23 paper
   enum EPar {
     eDiskB1 = 0,
@@ -82,6 +59,29 @@ private:
     eTwistingTime,
     eNpar
   };
+
+public:
+  /**
+     @brief constructor
+     @param mt model type  (see Tab.2 of UF23 paper)
+     @param maxRadiusInKpc maximum radius of field in kpc
+  */
+  UF23Field(const ModelType mt, const double maxRadiusInKpc = 30);
+  /// no default constructor
+  UF23Field() = delete;
+  /**
+     @brief calculate coherent magnetic field at a given position
+     @param posInKpc position with components given in kpc
+     @return coherent field in microgauss
+  */
+  Vector3 operator()(const Vector3& posInKpc) const;
+
+private:
+
+  /// model type given in constructor
+  const ModelType fModelType;
+  /// maximum galacto-centric radius beyond which B=0
+  const double fMaxRadiusSquared;
 
   // parameters are stored in array
   double fParameters[eNpar] = { 0 };
