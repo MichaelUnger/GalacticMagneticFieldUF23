@@ -33,7 +33,7 @@ make
 ```
 to compile a simple example program. Then type e.g.
 ```
-./uf23Field base 1 3 2
+./calcUF23Field base 1 3 2
 ```
 to obtain the following output:
 ```
