@@ -46,6 +46,7 @@ main(const int /*argc*/, const char** /*argv*/)
 
   for (unsigned int i = 0; i < models.size(); ++i) {
     const auto& model = models[i];
+    cout << " " << UF23Field::GetModelName(model) << " ..." << flush;
     const UF23Field uf23Field(model);
     if (verbose)
        cout << "------------------- " << model << endl;
@@ -60,6 +61,7 @@ main(const int /*argc*/, const char** /*argv*/)
         return 1;
       }
     }
+    cout << " ok" << endl;
   }
   cout << " ==> test of UF23Field successful " << endl;
   return 0;

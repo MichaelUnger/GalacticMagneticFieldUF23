@@ -32,6 +32,9 @@ public:
   const std::vector<UF23Field::EPar>& GetParameterIndices() const
   { return fIndices;}
 
+  /// print correlation matrix
+  void PrintCorrelationMatrix() const;
+
 private:
   /// model type
   const UF23Field::ModelType fModelType;

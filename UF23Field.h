@@ -14,6 +14,8 @@
  */
 
 #include <vector>
+#include <map>
+#include <string>
 #include "Vector3.h"
 
 class UF23Field {
@@ -29,6 +31,11 @@ public:
     twistX,
     nebCor
   };
+
+  static const std::string& GetModelName(const ModelType m)
+  { return fModelNames.at(m); }
+  const std::string& GetModelName() const
+  { return fModelNames.at(fModelType); }
 
   /// model parameters, see Table 3 of UF23 paper
   enum EPar {
@@ -133,5 +140,6 @@ private:
   /// -- Sec. 5.3.3
   Vector3 GetTwistedHaloField(const double x, const double y, const double z) const;
 
+  static const std::map<ModelType, std::string> fModelNames;
 };
 #endif

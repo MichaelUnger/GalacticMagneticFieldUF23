@@ -52,6 +52,18 @@ namespace utl {
   const double kilometer = kpc / 3.0856775807e+16;
 }
 
+// initialization of static members
+const std::map<UF23Field::ModelType, std::string> UF23Field::fModelNames =
+  { {base, "base"},
+    {neCL, "neCL"},
+    {expX, "expX"},
+    {spur, "spur"},
+    {cre10,"cre10"},
+    {synCG, "synCG"},
+    {twistX, "twistX"},
+    {nebCor, "nebCor"}
+  };
+
 
 UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
   fModelType(mt),
