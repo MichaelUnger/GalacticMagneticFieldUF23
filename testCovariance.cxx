@@ -1,3 +1,10 @@
+/** @file testCovariance.cxx
+
+    @brief  preform some simple tests ParameterCovariance class
+    @return 0 upon success
+
+*/
+
 #include "ParameterCovariance.h"
 
 #include <iostream>
@@ -14,7 +21,7 @@ main(const int /*argc*/, const char** /*argv*/)
 {
   const vector<UF23Field::ModelType> models =
     {
-     UF23Field::base, UF23Field::neCL, //, UF23Field::expX,
+     UF23Field::base, UF23Field::neCL, UF23Field::expX,
      UF23Field::spur, UF23Field::cre10, UF23Field::synCG,
      UF23Field::twistX, UF23Field::nebCor
     };
@@ -37,6 +44,14 @@ main(const int /*argc*/, const char** /*argv*/)
                               3.14437e-02, 1.06173e-01, 4.78309e-02,
                               2.97868e-02, 2.80728e-01, 1.82163e-02,
                               1.95662e-02, 2.93311e-02});
+  // expX
+  parUncertainties.push_back({1.48989e-01, 2.21413e-01, 1.56268e-01,
+                              1.01504e+01, 3.17765e+00, 2.37948e+00,
+                              1.33912e-01, 1.87891e-01, 1.81025e-01,
+                              1.84661e-01, 5.62493e-01, 8.89599e-01,
+                              3.58583e-01, 7.82523e-01, 1.42315e-01,
+                              7.18614e-02, 1.76351e+00, 2.34743e-02,
+                              2.27304e-02, 4.02352e-02});
   // spur
   parUncertainties.push_back({1.78487e-01, 2.96851e+00, 3.02899e+00,
                               1.39776e+00, 6.00781e-01, 6.03047e-01,
@@ -77,6 +92,7 @@ main(const int /*argc*/, const char** /*argv*/)
                               3.64884e-02, 9.78361e-02, 6.55231e-02,
                               3.30546e-02, 5.12207e-01, 2.69670e-02,
                               2.48811e-02});
+
 
   for (unsigned int iModel = 0; iModel < models.size(); ++iModel) {
     const auto& model = models[iModel];

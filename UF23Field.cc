@@ -253,7 +253,9 @@ UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
     fPoloidalB     =  5.8357990e+00 * microgauss;
     fPoloidalP     =  1.9510779e+00 * kpc;
     fPoloidalR     =  2.4994376e+00 * kpc;
-    fPoloidalZ     =  2.3684453e+00 * kpc;
+    // internally, xi is fitted and z = tan(xi)*a
+    fPoloidalXi    =  2.0926122e+01 * degree;
+    fPoloidalZ     =  fPoloidalA*tan(fPoloidalXi);
     fStriation     =  5.1440500e-01;
     fToroidalBN    =  2.7077434e+00 * microgauss;
     fToroidalBS    = -2.5677104e+00 * microgauss;

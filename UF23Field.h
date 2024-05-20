@@ -54,6 +54,7 @@ public:
     ePoloidalR,
     ePoloidalW,
     ePoloidalZ,
+    ePoloidalXi,
     eSpurCenter,
     eSpurLength,
     eSpurWidth,
@@ -108,6 +109,7 @@ private:
   double& fPoloidalR    = fParameters[ePoloidalR];
   double& fPoloidalW    = fParameters[ePoloidalW];
   double& fPoloidalZ    = fParameters[ePoloidalZ];
+  double& fPoloidalXi = fParameters[ePoloidalXi];
   double& fSpurCenter   = fParameters[eSpurCenter];
   double& fSpurLength   = fParameters[eSpurLength];
   double& fSpurWidth    = fParameters[eSpurWidth];
