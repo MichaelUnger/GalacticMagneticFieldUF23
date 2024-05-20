@@ -7,11 +7,12 @@ namespace utl {
 
   // calculat V = L * L^T
   vector<std::vector<double>>
-  VfromL(const std::vector<double>& lMatrix) {
-    const unsigned int n = (sqrt(1+8*lMatrix.size()) - 1) / 2;
-    vector<vector<double>> V(n, std::vector<double>(n, 0.));
+  VfromL(const std::vector<double>& L) {
 
-    auto index = [n](unsigned int i, unsigned int j) -> unsigned int {
+    const unsigned int n = (sqrt(1+8*L.size()) - 1) / 2;
+    vector<vector<double>> V(n, vector<double>(n, 0.));
+
+    auto index = [](unsigned int i, unsigned int j) {
        return (i * (i + 1)) / 2 + j;
     };
 
@@ -19,7 +20,7 @@ namespace utl {
       for (unsigned int j = 0; j <= i; ++j) {
         double sum = 0;
         for (unsigned int k = 0; k <= std::min(i, j); ++k)
-          sum += lMatrix[index(i, k)] * lMatrix[index(j, k)];
+          sum += L[index(i, k)] * L[index(j, k)];
         V[i][j] = sum;
         if (i != j)
           V[j][i] = sum;
@@ -81,12 +82,12 @@ ParameterCovariance::ParameterCovariance(const UF23Field::ModelType mt) :
           -1.81508e-03, -1.79711e-02, -6.11229e-03, -3.02850e-03, -1.75780e-03,
            3.12418e-03,  3.24976e-03,  5.01505e-03,  4.19117e-03,  9.90420e-03
     };
-    fIndices = {mf::eDiskB1,mf::eDiskB2,mf::eDiskB3,mf::eDiskPhase1,
-                mf::eDiskPhase2,mf::eDiskPhase3,mf::eDiskPitch,
-                mf::eToroidalBN,mf::eToroidalBS,mf::eToroidalR,
-                mf::eToroidalR,mf::eToroidalZ,mf::ePoloidalB,mf::ePoloidalP,
-                mf::ePoloidalR,mf::ePoloidalW,mf::ePoloidalZ,mf::eDiskH,
-                mf::eDiskW,mf::eStriation};
+    fIndices = {mf::eDiskB1, mf::eDiskB2, mf::eDiskB3, mf::eDiskPhase1,
+                mf::eDiskPhase2, mf::eDiskPhase3, mf::eDiskPitch,
+                mf::eToroidalBN, mf::eToroidalBS, mf::eToroidalR,
+                mf::eToroidalR, mf::eToroidalZ, mf::ePoloidalB, mf::ePoloidalP,
+                mf::ePoloidalR, mf::ePoloidalW, mf::ePoloidalZ, mf::eDiskH,
+                mf::eDiskW, mf::eStriation};
     break;
   }
   default: {
