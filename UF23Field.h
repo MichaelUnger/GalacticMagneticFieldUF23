@@ -34,6 +34,8 @@ public:
 
   static const std::string& GetModelName(const ModelType m)
   { return fModelNames.at(m); }
+  static const std::map<ModelType, std::string>& GetModelNames()
+  { return fModelNames; }
   const std::string& GetModelName() const
   { return fModelNames.at(fModelType); }
 

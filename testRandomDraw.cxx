@@ -94,5 +94,5 @@ main()
     }
     cout << " ok " << endl;
   }
-  cout << " ==> test of " << nTest << " matrix elements successful" << endl;
+  cout << " ==> test of sample covariance successful (" << nTest << " matrix elements)" << endl;
 }

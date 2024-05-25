@@ -33,57 +33,64 @@
 #include <iomanip>
 
 using namespace std;
+using ModelType = UF23Field::ModelType;
+int readCommandLine(const int, const char**, Vector3&, ModelType&);
+
+int
+main(const int argc, const char** argv)
+{
+  // read and check command line parameters
+  Vector3 position;
+  ModelType model;
+  if (const int iError = readCommandLine(argc, argv, position, model))
+    return iError;
+
+  // evaluate the corresponding UF23Field model at requested position
+  const UF23Field uf23Field(model);
+  const auto field = uf23Field(position);
+  cout << scientific << setprecision(4)
+       << "(x,y,z)    = (" << position << ") kpc\n"
+       << "(bx,by,bz) = (" << field << ") microgauss" << endl;
+  return 0;
+}
 
 void
-usage(const string& progName, const vector<string>& models)
+usage(const string& progName)
 {
   cerr << " usage: " << progName << " <model name> <x> <y> <z> \n"
        << "        " << " galactocentric coordinates x/y/z in kpc\n"
        << "        " << " (Earth at negative x, North at positive z)\n"
        << "        " << " available models: ";
-  for (const auto& m : models)
-    cerr << m << (&m != &models.back() ? ", " : "\n");
+  const auto& modelNames = UF23Field::GetModelNames();
+  for (const auto& m : modelNames)
+    cerr << m.second << " ";
+  cout << endl;
 }
 
 int
-main(const int argc, const char** argv)
+readCommandLine(const int argc, const char** argv,
+                Vector3& position, ModelType& model)
 {
-  const map<string, UF23Field::ModelType> uf23Models =
-    {
-     {"base", UF23Field::base},
-     {"neCL", UF23Field::neCL},
-     {"expX", UF23Field::expX},
-     {"spur", UF23Field::spur},
-     {"cre10", UF23Field::cre10},
-     {"synCG", UF23Field::synCG},
-     {"twistX", UF23Field::twistX},
-     {"nebCor", UF23Field::nebCor}
-    };
-
-  vector<string> modelNames;
-  for (const auto& iter : uf23Models)
-    modelNames.push_back(iter.first);
+  const auto& modelNames = UF23Field::GetModelNames();
+  map<string, UF23Field::ModelType> uf23Models;
+  for (const auto& mn : modelNames)
+    uf23Models[mn.second] = mn.first;
 
   if (argc < 5 || !uf23Models.count(argv[1])) {
-    usage(argv[0], modelNames);
+    usage(argv[0]);
     return 1;
   }
 
-  Vector3 position;
+  model = uf23Models.at(argv[1]);
+
   try {
     position.Set(stod(argv[2]),
                  stod(argv[3]),
                  stod(argv[4]));
   }
   catch (...) {
-    usage(argv[0], modelNames);
+    usage(argv[0]);
     return 2;
   }
-
-  const UF23Field uf23Field(uf23Models.at(argv[1]));
-  const auto field = uf23Field(position);
-  cout << scientific << setprecision(4)
-       << "(x,y,z)    = (" << position << ") kpc\n"
-       << "(bx,by,bz) = (" << field << ") microgauss" << endl;
   return 0;
 }
