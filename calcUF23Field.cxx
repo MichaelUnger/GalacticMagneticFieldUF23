@@ -1,4 +1,4 @@
-/** @file uf23Field.cxx
+/** @file calcUF23Field.cxx
 
  @brief  example program to calculate the coherent Galactic magnetic field
  @return an integer 0 upon success
@@ -16,7 +16,7 @@
  note: this is just a test program. If many evaluations are needed
  it is very inefficient to call this program repeatedly due to
  the overhead of initialization. For that case it is better
- to implement a loop over positions below.
+ to implement a loop over positions.
 
  Please send bugs and suggestions to michael.unger@kit.edu and gf25@nyu.edu
 

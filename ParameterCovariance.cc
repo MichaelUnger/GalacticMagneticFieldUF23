@@ -468,7 +468,7 @@ ParameterCovariance::PrintCorrelationMatrix()
 
 
 std::vector<double>
-ParameterCovariance::GetRandomOffset(const std::vector<double>& norm)
+ParameterCovariance::GetRandomDelta(const std::vector<double>& norm)
   const
 {
   const unsigned int n = GetDimension();

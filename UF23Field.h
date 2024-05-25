@@ -84,6 +84,12 @@ public:
   */
   Vector3 operator()(const Vector3& posInKpc) const;
 
+  /// get parameter vector (units: kpc, microgauss, degree, Myr)
+  std::vector<double> GetParameters() const;
+
+  /// overwrite default model parameters (units: kpc, microgauss, degree, Myr)
+  void SetParameters(const std::vector<double>& newpar);
+
 private:
 
   /// model type given in constructor

@@ -39,10 +39,10 @@ public:
   unsigned int GetDimension() const { return fIndices.size(); }
 
   /**
-     parameter offsets delta = L * n distributed according to V given
+     parameter offset delta = L * n distributed according to V given
      vector of standard normal random numbers n
   */
-  std::vector<double> GetRandomOffset(const std::vector<double>& n) const;
+  std::vector<double> GetRandomDelta(const std::vector<double>& n) const;
 
 private:
   /// model type

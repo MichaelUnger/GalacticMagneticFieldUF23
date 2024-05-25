@@ -48,7 +48,7 @@ main()
     vector<double> cov((n*(n+1))/2, 0.);
     for (unsigned int iDraw = 0; iDraw < nDraw; ++iDraw) {
       generate(begin(normal), end(normal), gen);
-      const auto delta = pcov.GetRandomOffset(normal);
+      const auto delta = pcov.GetRandomDelta(normal);
       int k = 0;
       for (unsigned int i = 0; i < n; ++i) {
         for (unsigned int j = 0; j <= i; ++j) {

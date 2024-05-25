@@ -555,3 +555,71 @@ UF23Field::GetSpiralField(const double x, const double y, const double z)
   const double sinPhi = y / r;
   return utl::CylToCart(bCyl, cosPhi, sinPhi);
 }
+
+
+namespace utl {
+  const std::vector<double> unitConv =
+    {
+     microgauss, //eDiskB1,
+     microgauss, //eDiskB2,
+     microgauss, //eDiskB3,
+     kpc, //eDiskH,
+     degree, //eDiskPhase1,
+     degree, //eDiskPhase2,
+     degree, //eDiskPhase3,
+     degree, //eDiskPitch,
+     kpc, //eDiskW,
+     kpc, //ePoloidalA,
+     microgauss, //ePoloidalB,
+     1, //ePoloidalP,
+     kpc, //ePoloidalR,
+     kpc, //ePoloidalW,
+     kpc, //ePoloidalZ,
+     degree, //ePoloidalXi,
+     degree, //eSpurCenter,
+     degree, //eSpurLength,
+     degree, //eSpurWidth,
+     1, //eStriation,
+     microgauss, //eToroidalBN,
+     microgauss, //eToroidalBS,
+     kpc, //eToroidalR,
+     kpc, //eToroidalW,
+     kpc, //eToroidalZ,
+     megayear //eTwistingTime
+    };
+}
+
+std::vector<double>
+UF23Field::GetParameters()
+  const
+{
+  using namespace utl;
+  if (unitConv.size() != eNpar)
+    throw std::runtime_error("invalid unit vector");
+
+  std::vector<double> retVec;
+  for (unsigned int i = 0; i < eNpar; ++i)
+    retVec.push_back(fParameters[i] / unitConv[i]);
+  return retVec;
+}
+
+void
+UF23Field::SetParameters(const std::vector<double>& newpar)
+{
+  using namespace utl;
+  if (newpar.size() != eNpar)
+    throw std::runtime_error("invalid parameter vector");
+
+  if (unitConv.size() != eNpar)
+    throw std::runtime_error("invalid unit vector");
+
+  for (unsigned int i = 0; i < eNpar; ++i)
+    fParameters[i] = newpar[i] * unitConv[i];
+
+  fSinPitch = sin(fDiskPitch);
+  fCosPitch = cos(fDiskPitch);
+  fTanPitch = tan(fDiskPitch);
+  if (fModelType == expX)
+    fPoloidalZ     =  fPoloidalA*tan(fPoloidalXi);
+
+}

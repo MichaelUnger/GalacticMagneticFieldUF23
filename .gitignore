@@ -1,5 +1,6 @@
 *.o
 calcUF23Field
+sampleUF23Field
 testUF23Field
 testCovariance
 testRandomDraw
