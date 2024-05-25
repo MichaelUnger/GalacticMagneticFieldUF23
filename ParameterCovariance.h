@@ -4,7 +4,7 @@
  @class ParameterCovariance
  @brief Covariance matrix of the parameters of the UF23 GMF models
 
- See appendix C of M. Unger and G.R. Farrar, arXiv:2311.12120v3
+ See appendix C of M. Unger and G.R. Farrar, arXiv:2311.12120
 
  */
 
@@ -22,7 +22,7 @@ public:
   /// no default constructor
   ParameterCovariance() = delete;
 
-  /// covariance matrix V
+  /// covariance matrix V (units: microGauss, kpc, degree, Myr)
   const std::vector<std::vector<double>>& GetCovarianceMatrix() const
   { return fV; }
   /// lower-triagonal L matrix (Cholesky decomposition V = L * L^T)
@@ -34,6 +34,15 @@ public:
 
   /// print correlation matrix
   void PrintCorrelationMatrix() const;
+
+  /// get matrix dimension
+  unsigned int GetDimension() const { return fIndices.size(); }
+
+  /**
+     parameter offsets delta = L * n distributed according to V given
+     vector of standard normal random numbers n
+  */
+  std::vector<double> GetRandomOffset(const std::vector<double>& n) const;
 
 private:
   /// model type

@@ -1,11 +1,13 @@
 #include "ParameterCovariance.h"
 
+#include <stdexcept>
 #include <iostream>
 #include <iomanip>
+#include <string>
+using namespace std;
 
 namespace utl {
 
-  using namespace std;
 
   // calculat V = L * L^T
   vector<std::vector<double>>
@@ -195,7 +197,7 @@ ParameterCovariance::ParameterCovariance(const UF23Field::ModelType mt) :
     break;
   }
   case mf::cre10: {
-   fL = {
+    fL = {
            1.37551e-01,  7.05676e-02,  2.00617e-01,  5.41195e-03,  7.10812e-02,
            1.36857e-01, -3.76086e+00, -5.03473e+00,  3.45005e-01,  4.32960e+00,
            2.18075e-01, -7.36663e-01, -1.26842e+00,  2.09765e+00,  1.06916e+00,
@@ -303,7 +305,7 @@ ParameterCovariance::ParameterCovariance(const UF23Field::ModelType mt) :
     break;
   }
   case mf::twistX: {
-   fL = {
+    fL = {
            1.72433e-01,  8.37026e-02,  2.90355e-01, -1.76817e-01,  8.54977e-02,
            1.67920e-01,  7.01813e+00,  6.69310e+00, -3.66782e-01,  6.07378e+00,
            8.35414e+00, -2.25688e+00, -2.87561e+00,  3.76860e+00,  2.79103e+00,
@@ -340,7 +342,7 @@ ParameterCovariance::ParameterCovariance(const UF23Field::ModelType mt) :
    break;
   }
   case mf::nebCor: {
-   fL = {
+    fL = {
            1.86530e-01, -8.70506e-02,  2.56533e-01,  4.25910e-02,  7.29929e-02,
            1.90298e-01,  4.12779e+00, -5.58291e+00, -1.22614e-01,  4.86318e+00,
           -4.96171e-01, -7.66097e-01, -1.57074e+00,  2.29873e+00,  1.33702e+00,
@@ -454,7 +456,6 @@ void
 ParameterCovariance::PrintCorrelationMatrix()
   const
 {
-  using namespace std;
   for (unsigned int iPar = 0; iPar < fV.size(); ++iPar) {
     for (unsigned int jPar = 0; jPar < fV.size(); ++jPar) {
       const double denom = sqrt(fV[jPar][jPar]*fV[iPar][iPar]);
@@ -463,4 +464,24 @@ ParameterCovariance::PrintCorrelationMatrix()
     }
     cout << endl;
   }
+}
+
+
+std::vector<double>
+ParameterCovariance::GetRandomOffset(const std::vector<double>& norm)
+  const
+{
+  const unsigned int n = GetDimension();
+  if (norm.size() != fIndices.size())
+    throw std::length_error("n.size() = " + to_string(norm.size()) +
+                            " != matrix dimension = " + to_string(n));
+  vector<double> delta(n, 0);
+  int k = 0;
+  for (unsigned int i = 0; i < n; ++i) {
+    for (unsigned int j = 0; j <= i; ++j) {
+      delta[i] += fL[k] * norm[j];
+      ++k;
+    }
+  }
+  return delta;
 }
