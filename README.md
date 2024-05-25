@@ -23,7 +23,7 @@ const auto field = uf23Field(position);
 cout << field.x << " " << field.y << " " << field.z << endl;
 ```
 
-Here the constructor takes an argument specifiying one of the eight UF23 models (`base`, `cre10`, `expX`, `neCL`, `nebCor`, `spur`, `synCG` or `twistX`). The position is given in cartesian galacto-centric coordinates in units of kpc (Earth at negative *x*, North at positive *z*). The output magnetic field vector is again in cartesian galacto-centric coordinates, the unit of its components is &mu;G (micro-Gauss).
+Here the constructor takes an argument specifying one of the eight UF23 models (`base`, `cre10`, `expX`, `neCL`, `nebCor`, `spur`, `synCG` or `twistX`). The position is given in Cartesian galacto-centric coordinates in units of kpc (Earth at negative *x*, North at positive *z*). The output magnetic field vector is again in Cartesian galacto-centric coordinates, the unit of its components is &mu;G (micro-Gauss).
 
 ## Example programs
 
