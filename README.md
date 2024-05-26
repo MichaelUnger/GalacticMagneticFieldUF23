@@ -15,7 +15,7 @@ Scientific or technical publications resulting from projects using this code are
 
 ## Usage
 
-All the relevant code is in the UF23Field class. The magnetic field of e.g. the `base` model at a certain position can be obtained as
+To calculate the magnetic field of the models, only the code implemented in the UF23Field class is needed. E.g., the magnetic field of the `base` model at a certain position can be obtained as
 ```C++
 const UF23Field uf23Field(UF23Field::base);
 const Vector3 position(1, 3, 2);
