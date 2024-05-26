@@ -53,6 +53,7 @@ field in a particular direction (longitude and latitude), e.g.
 will give the output
 ```
 line-of-sight direction: (l, b) = (50, 15) degree
+
                        \int B_\parallel dl   \int B_\perp^2 dl
                           (microGauss kpc)   (microGauss^2 kpc)
 --------------------+----------------------+----------------------+

@@ -191,7 +191,7 @@ readCommandLine(const int argc, const char** argv,
     const double lat = stod(argv[3])*degree;
     cout << "line-of-sight direction: (l, b) = ("
          << longi / degree << ", " << lat / degree
-         << ") degree" << endl;
+         << ") degree\n" << endl;
     const double rxy = cos(lat);
     const double x = cos(longi) * rxy;
     const double y = sin(longi) * rxy;
