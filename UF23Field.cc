@@ -623,3 +623,10 @@ UF23Field::SetParameters(const std::vector<double>& newpar)
     fPoloidalZ     =  fPoloidalA*tan(fPoloidalXi);
 
 }
+
+double
+UF23Field::GetMaximumSquaredRadius()
+  const
+{
+  return fMaxRadiusSquared / utl::kpc;
+}

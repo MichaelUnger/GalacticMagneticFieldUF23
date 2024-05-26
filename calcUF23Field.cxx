@@ -7,8 +7,8 @@
 
     <model name> <x> <y> <z>
 
- where x/y/z are the galactocentric coordinates in kpc (Earth at negative x,
- North at positive z) and the model is one of either base, cre10, expX, neCL,
+ where "x/y/z" are the galactocentric coordinates in kpc (Earth at negative x,
+ North at positive z) and "model" is one of either base, cre10, expX, neCL,
  nebCor, spur, synCG or twistX (see arXiv:2311.12120 for details)
 
  prints the three components of the coherent field in microgauss

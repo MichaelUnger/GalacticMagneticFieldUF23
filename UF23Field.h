@@ -92,6 +92,9 @@ public:
   /// overwrite default model parameters (units: kpc, microgauss, degree, Myr)
   void SetParameters(const std::vector<double>& newpar);
 
+  /// maximum squared radius of field model
+  double GetMaximumSquaredRadius() const;
+
 private:
 
   /// model type given in constructor

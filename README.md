@@ -44,6 +44,26 @@ to obtain the following output:
 Note: this is just a test program. If many evaluations are needed it is very inefficient to execute the uf23Field program repeatedly due to the overhead of initialization. For that case it is better to implement a loop over positions inside the code.
 
 Another example program called `sampleUF23Field` illustrates the sampling
-of parameter uncertainties for advanced users.
+of parameter uncertainties for error propagation. It computes the
+line-of-sight integral of the parallel and squared perpendicular magnetic
+field in a particular direction (longitude and latitude), e.g.
+```
+./sampleUF23Field base 50 15
+```
+will give the output
+```
+line-of-sight direction: (l, b) = (50, 15) degree
+                       \int B_\parallel dl   \int B_\perp^2 dl
+                          (microGauss kpc)   (microGauss^2 kpc)
+--------------------+----------------------+----------------------+
+ nominal parameters |           -1.0664e+01|            1.7967e+01|
+ standard deviation |            7.3508e-01|            1.1969e+00|
+--------------------+----------------------+----------------------+
+```
+
+For further technical tests, run
+```
+make test
+```
 
  Please send bugs and suggestions to [Michael Unger](mailto:michael.unger@kit.edu) and [Glennys R. Farrar](mailto:gf25@nyu.edu).
