@@ -5,7 +5,7 @@
 
 */
 
-#include "ParameterCovariance.h"
+#include "../ParameterCovariance.h"
 
 #include <iostream>
 #include <iomanip>

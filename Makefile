@@ -2,7 +2,7 @@ CXX := g++
 CXXFLAGS := -std=c++11 -Wall -Wextra -pedantic -O3
 
 EXE := $(patsubst %.cxx, %, $(wildcard *.cxx))
-TESTS := $(patsubst %.cxx, %, $(wildcard test*.cxx))
+TESTS := $(patsubst %.cxx, %, $(wildcard Test/test*.cxx))
 SRCS := $(wildcard *.cc)
 OBJS := $(patsubst %.cc,%.o,$(SRCS))
 
@@ -15,9 +15,9 @@ all: $(EXE)
 	$(CXX) $(CXXFLAGS) -c $<
 
 test: $(TESTS)
-	./testUF23Field
-	./testCovariance
-	./testRandomDraw
+	./Test/testUF23Field
+	./Test/testCovariance
+	./Test/testRandomDraw
 
 clean:
 	rm -rf $(EXE) *.o

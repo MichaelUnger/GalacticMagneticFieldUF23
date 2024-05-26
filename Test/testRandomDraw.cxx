@@ -1,4 +1,4 @@
-#include "ParameterCovariance.h"
+#include "../ParameterCovariance.h"
 
 #include <random>
 #include <iostream>
