@@ -61,6 +61,7 @@ main(const int argc, const char** argv)
 
   // UF23 model
   UF23Field uf23Field(model);
+  // line-of-sight integrals for nominal parameters
   const auto nominalLos = losIntegral(uf23Field, sunPos, uLos, dL);
 
   // parameter covariance
