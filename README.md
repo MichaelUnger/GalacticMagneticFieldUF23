@@ -41,19 +41,9 @@ to obtain the following output:
 (bx,by,bz) = (-1.7697e+00, 8.5706e-01, 6.6356e-01) microgauss
 ```
 
-Note: this is just a test program. If many evaluations are needed it is very inefficient to execute the uf23Field program repeatedly due to the overhead of initialization. For that case it is better to implement a loop over positions inside the code.
+Note: this is just a test program. If many evaluations are needed it is very inefficient to execute the `calcUF23Field` program repeatedly due to the overhead of initialization. For that case it is better to implement a loop over positions inside the code.
 
-Another example program called `sampleUF23Field` illustrates the sampling of parameter uncertainties for error propagation. It computes the line-of-sight integral of the parallel and squared perpendicular magnetic field in a particular direction (given the Galactic longitude and latitude in degree), e.g.
-```
-./sampleUF23Field base 50 15
-```
-will give the output
-```
-line-of-sight direction: (l, b) = (50, 15) degree
-
-==> \int_0^\infty B_\parallel dl = (-1.0676e+01 +/- 7.3506e-01) microGauss kpc
-==> \int_0^\infty B_\perp^2 dl   = ( 1.7965e+01 +/- 1.1968e+00) microGauss^2 kpc
-```
+Another example program called `sampleUF23Field` illustrates the sampling of parameter uncertainties for advanced users.
 
 For further technical tests, run
 ```
