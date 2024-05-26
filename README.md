@@ -43,10 +43,7 @@ to obtain the following output:
 
 Note: this is just a test program. If many evaluations are needed it is very inefficient to execute the uf23Field program repeatedly due to the overhead of initialization. For that case it is better to implement a loop over positions inside the code.
 
-Another example program called `sampleUF23Field` illustrates the sampling
-of parameter uncertainties for error propagation. It computes the
-line-of-sight integral of the parallel and squared perpendicular magnetic
-field in a particular direction (longitude and latitude), e.g.
+Another example program called `sampleUF23Field` illustrates the sampling of parameter uncertainties for error propagation. It computes the line-of-sight integral of the parallel and squared perpendicular magnetic field in a particular direction (given the Galactic longitude and latitude in degree), e.g.
 ```
 ./sampleUF23Field base 50 15
 ```
