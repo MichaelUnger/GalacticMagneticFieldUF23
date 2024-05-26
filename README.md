@@ -54,12 +54,8 @@ will give the output
 ```
 line-of-sight direction: (l, b) = (50, 15) degree
 
-                       \int B_\parallel dl   \int B_\perp^2 dl
-                          (microGauss kpc)   (microGauss^2 kpc)
---------------------+----------------------+----------------------+
- nominal parameters |           -1.0664e+01|            1.7967e+01|
- standard deviation |            7.3508e-01|            1.1969e+00|
---------------------+----------------------+----------------------+
+==> \int_0^\infty B_\parallel dl = (-1.0676e+01 +/- 7.3506e-01) microGauss kpc
+==> \int_0^\infty B_\perp^2 dl   = ( 1.7965e+01 +/- 1.1968e+00) microGauss^2 kpc
 ```
 
 For further technical tests, run

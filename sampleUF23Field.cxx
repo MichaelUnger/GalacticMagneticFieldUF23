@@ -1,7 +1,7 @@
 /** @file sampleUF23Field.cxx
 
- @brief  Example program demonstrating the use of parameter sampling
-         Progates GMF parameter uncertainties to line-of-sight integrals
+ @brief  Example program demonstrating the use of parameter sampling.
+         Progates GMF parameter uncertainties to line-of-sight integrals.
  @return an integer 0 upon success
 
  command line parameters are
@@ -11,10 +11,10 @@
  where "l" and "b" denote the Galactic longitude and latitude in
  degrees of the direction to integrate over and the model is one of
  either base, cre10, expX, neCL, nebCor, spur, synCG or twistX (see
- arXiv:2311.12120 for details)
+ arXiv:2311.12120 for details).
 
- prints the line-of-sight integrals of B_\parallel, B_\perp and B_\perp^2
- and their uncertainties due to the parameter uncertainties.
+ Prints the line-of-sight integrals of B_\parallel and B_\perp^2
+ and their standard deviation due to the parameter uncertainties.
 
  Please send bugs and suggestions to michael.unger@kit.edu and gf25@nyu.edu
 
@@ -46,43 +46,28 @@ const double degree = kPi/180.;
 int
 main(const int argc, const char** argv)
 {
+  // position of observer
+  const Vector3 sunPos(-8.178, 0, 0);
+
   // parameters for integration and error propagation
   const unsigned int nSamples = 1000;
-  const double dL = 0.1;
-  const Vector3 sunPos(-8.178, 0, 0);
+  const double dL = 0.01; // 10 pc step length
 
   // command line parameters
   Vector3 uLos;
   ModelType model;
-  if (const int iErr = readCommandLine(argc, argv, uLos, model))
-    return iErr;
+  if (const int iError = readCommandLine(argc, argv, uLos, model))
+    return iError;
 
   // UF23 model
   UF23Field uf23Field(model);
-  auto los = losIntegral(uf23Field, sunPos, uLos, dL);
-  const int colWidth = 22;
-  const int firstColWidth = 20;
-  cout << setw(firstColWidth) << " "
-       << setw(colWidth) << "\\int B_\\parallel dl"
-       << setw(colWidth) << "\\int B_\\perp^2 dl \n";
-  cout << setw(firstColWidth) << " "
-       << setw(colWidth) << "(microGauss kpc)"
-       << setw(colWidth) << "(microGauss^2 kpc)\n";
-  ostringstream hrule;
-  hrule << string(firstColWidth, '-') << "+"
-        << string(colWidth, '-') << "+"
-        << string(colWidth, '-') <<"+\n";
-  cout << hrule.str();
-  cout << setw(firstColWidth)  << " nominal parameters "  << "|"
-       << scientific << setprecision(4)
-       << setw(colWidth) << los.first << "|"
-       << setw(colWidth) << los.second << "|" << endl;
+  const auto nominalLos = losIntegral(uf23Field, sunPos, uLos, dL);
 
   // parameter covariance
   const ParameterCovariance pcov(model);
   const unsigned int dim = pcov.GetDimension();
 
-  // remember the original parameters
+  // copy original parameters
   const auto centralValues = uf23Field.GetParameters();
 
   // generator for standard-normal distributed random numbers
@@ -94,8 +79,8 @@ main(const int argc, const char** argv)
   // mapping of elements in parameter vector and covariance matrix
   const auto indices = pcov.GetParameterIndices();
 
-  // draw n samples of the parameters
-  double sumParallel = 0;  double sumParallel2 = 0;
+  // draw n samples of the parameters and accumulate sums for 1st and 2nd moment
+  double sumPara = 0;  double sumPara2 = 0;
   double sumPerp = 0;  double sumPerp2 = 0;
 
   for (unsigned int i = 0; i < nSamples; ++i) {
@@ -113,50 +98,57 @@ main(const int argc, const char** argv)
     uf23Field.SetParameters(sampledParameters);
     auto los = losIntegral(uf23Field, sunPos, uLos, dL);
 
-    sumParallel += los.first;  sumParallel2 += pow(los.first, 2);
+    sumPara += los.first;  sumPara2 += pow(los.first, 2);
     sumPerp += los.second; sumPerp2 += pow(los.second, 2);
   }
 
-  // mean and variance
-  const double muPar = sumParallel / nSamples;
-  const double vPar = sumParallel2 / nSamples - pow(muPar, 2);
-  const double muPerp = sumPerp / nSamples;
-  const double vPerp = sumPerp2 / nSamples - pow(muPerp, 2);
+  // variance = central second moment
+  const double vPar = sumPara2 / nSamples - pow(sumPara / nSamples, 2);
+  const double vPerp = sumPerp2 / nSamples - pow(sumPerp / nSamples, 2);
 
-  cout << setw(firstColWidth)  << " standard deviation " << "|"
+  const int width = 11;
+  cout << "==> \\int_0^\\infty B_\\parallel dl = ("
        << scientific << setprecision(4)
-       << setw(colWidth) << sqrt(vPar)  << "|"
-       << setw(colWidth) << sqrt(vPerp)  << "|" << endl;
-  cout << hrule.str() << endl;
+       << setw(width)
+       << nominalLos.first << " +/- "
+       << sqrt(vPar)
+       << ") microGauss kpc" << endl;
+  cout << "==> \\int_0^\\infty B_\\perp^2 dl   = ("
+       << scientific << setprecision(4)
+       << setw(width)
+       << nominalLos.second << " +/- "
+       << sqrt(vPerp)
+       << ") microGauss^2 kpc\n" << endl;
 
   return 0;
 }
 
 
+// very simple integral, just for demonstration
 std::pair<double, double>
 losIntegral(const UF23Field& magField, const Vector3& startPos,
             const Vector3& direction, const double dL)
 {
-  double sumParallel = 0;
-  double sumPerpendicular2 = 0;
+  double sumPara = 0;
+  double sumPerp = 0;
   const double rMax2 = magField.GetMaximumSquaredRadius();
   Vector3 pos = startPos;
   double l = 0;
   while (pos.SquaredLength() < rMax2) {
     const auto b = magField(pos);
-    const double bParallel = dotprod(b, direction);
+    const double bPara = dotprod(b, direction);
     const Vector3 bProj = crossprod(direction, crossprod(b, direction));
     const double bPerp2 = bProj.SquaredLength();
-    sumParallel += bParallel;
-    sumPerpendicular2 += bPerp2;
+    sumPara += bPara;
+    sumPerp += bPerp2;
     l += dL;
     pos = startPos + direction * l;
   }
-  return make_pair(sumParallel*dL, sumPerpendicular2*dL);
+  return make_pair(sumPara*dL, sumPerp*dL);
 }
 
 
-  void
+void
 usage(const string& progName)
 {
   cerr << " usage: " << progName << " <model name> <l> <b>\n"
