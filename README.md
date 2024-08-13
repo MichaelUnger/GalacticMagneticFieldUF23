@@ -1,16 +1,9 @@
 UF23 Galactic Magnetic Field Models
 ===================================
 
-C++ implementation of Galactic Magnetic Field models from the paper [The Coherent Magnetic Field of the Milky Way](https://arxiv.org/abs/2311.12120) by [Michael Unger](mailto:michael.unger@kit.edu) and [Glennys R. Farrar](mailto:gf25@nyu.edu).
+[![DOI](https://zenodo.org/badge/753818568.svg)](https://zenodo.org/doi/10.5281/zenodo.10627090)  [![arXiv](https://img.shields.io/badge/arXiv-2311.12120-b31b1b.svg?style=plastic)](https://arxiv.org/abs/2311.12120)
 
-
-Download latest release on zenodo: [![DOI](https://zenodo.org/badge/753818568.svg)](https://zenodo.org/doi/10.5281/zenodo.10627090)
-
-## License
-
-Released under BSD 2-Clause "Simplified" License.
-
-Scientific or technical publications resulting from projects using this code are kindly requested to cite [arXiv:2311.12120](https://arxiv.org/abs/2311.12120).
+C++ implementation of Galactic Magnetic Field models from the paper [The Coherent Magnetic Field of the Milky Way](https://doi.org/10.3847/1538-4357/ad4a54) by [Michael Unger](mailto:michael.unger@kit.edu) and [Glennys R. Farrar](mailto:gf25@nyu.edu).
 
 
 ## Usage
@@ -50,4 +43,23 @@ For further technical tests, run
 make test
 ```
 
- Please send bugs and suggestions to [Michael Unger](mailto:michael.unger@kit.edu) and [Glennys R. Farrar](mailto:gf25@nyu.edu).
+## License
+
+Released under BSD 2-Clause "Simplified" License.
+
+Please cite  [Unger and Farrar (2024)](https://doi.org/10.3847/1538-4357/ad4a54) if you find this code useful in your research. The BibTeX entry for the paper is:
+```
+@article{UngerFarrar2023,
+    author = "Unger, Michael and Farrar, Glennys R.",
+    title = "{The Coherent Magnetic Field of the Milky Way}",
+    eprint = "2311.12120",
+    archivePrefix = "arXiv",
+    primaryClass = "astro-ph.GA",
+    doi = "10.3847/1538-4357/ad4a54",
+    journal = "Astrophys. J.",
+    volume = "970",
+    number = "1",
+    pages = "95",
+    year = "2024"
+}
+```
