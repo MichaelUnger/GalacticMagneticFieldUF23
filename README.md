@@ -6,6 +6,7 @@ UF23 Galactic Magnetic Field Models
 C++ implementation of Galactic Magnetic Field models from the paper [The Coherent Magnetic Field of the Milky Way](https://doi.org/10.3847/1538-4357/ad4a54) by [Michael Unger](mailto:michael.unger@kit.edu) and [Glennys R. Farrar](mailto:gf25@nyu.edu).
 
 
+
 ## Usage
 
 To calculate the magnetic field of the models, only the code implemented in the UF23Field class is needed. E.g., the magnetic field of the `base` model at a certain position can be obtained as
