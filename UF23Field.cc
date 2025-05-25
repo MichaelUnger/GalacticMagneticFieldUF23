@@ -40,16 +40,17 @@ namespace utl {
     return acos(cos(phi1)*cos(phi0) + sin(phi1)*sin(phi0));
   }
 
-  const double kPi = 3.1415926535897932384626;
-  const double kTwoPi = 2*kPi;
-  const double degree = kPi/180.;
-  const double kpc = 1;
-  const double microgauss = 1;
-  const double megayear = 1;
-  const double Gpc = 1e6*kpc;
-  const double pc = 1e-3*kpc;
-  const double second  = megayear / (1e6*60*60*24*365.25);
-  const double kilometer = kpc / 3.0856775807e+16;
+  constexpr double kPi = 3.1415926535897932384626;
+  constexpr double kLn10    = 2.3025850929940456840180;
+  constexpr double kTwoPi = 2*kPi;
+  constexpr double degree = kPi/180.;
+  constexpr double kpc = 1;
+  constexpr double microgauss = 1;
+  constexpr double megayear = 1;
+  constexpr double Gpc = 1e6*kpc;
+  constexpr double pc = 1e-3*kpc;
+  constexpr double second  = megayear / (1e6*60*60*24*365.25);
+  constexpr double kilometer = kpc / 3.0856775807e+16;
 }
 
 // initialization of static members
@@ -341,18 +342,24 @@ UF23Field::GetTwistedHaloField(const double x, const double y, const double z)
     // Eq.(43)
     const double fr = 1 - exp(-r/r0);
     // Eq.(44)
-    const double t0 = exp(2*std::abs(z)/z0);
-    const double gz = 2 / (1 + t0);
+    constexpr double maxArg =
+      std::numeric_limits<double>::max_exponent10 * utl::kLn10;
+    const double arg = 2*std::abs(z)/z0;
+    if (arg > maxArg)
+      bPhi= 0;
+    else {
+      const double t0 = exp(arg);
+      const double gz =  2 / (1 + t0);
 
-    // Eq. (46)
-    const double signZ = z < 0 ? -1 : 1;
-    const double deltaZ =  -signZ * v0 * fr / z0  * t0 * pow(gz, 2);
-    // Eq. (47)
-    const double deltaR = v0 * ((1-fr)/r0 - fr/r) * gz;
+      // Eq. (46)
+      const double signZ = z < 0 ? -1 : 1;
+      const double deltaZ =  -signZ * v0 * fr / z0  * t0 * pow(gz, 2);
+      // Eq. (47)
+      const double deltaR = v0 * ((1-fr)/r0 - fr/r) * gz;
 
-    // Eq.(45)
-    bPhi = (bZ * deltaZ + bR * deltaR) * fTwistingTime;
-
+      // Eq.(45)
+      bPhi = (bZ * deltaZ + bR * deltaR) * fTwistingTime;
+    }
   }
   const double bCylX[3] = {bR, bPhi , bZ};
   return utl::CylToCart(bCylX, cosPhi, sinPhi);
