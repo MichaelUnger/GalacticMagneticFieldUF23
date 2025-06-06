@@ -64,3 +64,13 @@ Please cite  [Unger and Farrar (2024)](https://doi.org/10.3847/1538-4357/ad4a54)
     year = "2024"
 }
 ```
+
+## Python bindings
+If `pybind` is installed, then Python bindings can be compiled via
+```
+make pybind
+```
+Then test via
+```
+python3 Python/uf23_field.py
+```

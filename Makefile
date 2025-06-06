@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -std=c++11 -Wall -Wextra -pedantic -O3
+CXXFLAGS := -Wall -Wextra -pedantic -O3
 
 EXE := $(patsubst %.cxx, %, $(wildcard *.cxx))
 TESTS := $(patsubst %.cxx, %, $(wildcard Test/test*.cxx))
@@ -12,15 +12,19 @@ all: $(EXE)
 	$(CXX) -o $@ $^ $(CXXFLAGS)
 
 %.o: %.cc
-	$(CXX) $(CXXFLAGS) -c $<
+	$(CXX) $(CXXFLAGS) -fPIC -c $<
 
 test: $(TESTS)
 	./Test/testUF23Field
 	./Test/testCovariance
 	./Test/testRandomDraw
 
+pybind: ./UF23Field.o
+	$(MAKE) -C Python
+
 clean:
 	rm -rf $(EXE) *.o
+	$(MAKE) -C Python clean
 
 .PRECIOUS: %.o
 .PHONY: all clean
