@@ -65,6 +65,16 @@ const std::map<UF23Field::ModelType, std::string> UF23Field::fModelNames =
     {nebCor, "nebCor"}
   };
 
+const std::map<std::string, UF23Field::ModelType> UF23Field::fModelTypes =
+  { {"base", base},
+    {"neCL", neCL},
+    {"expX", expX},
+    {"spur", spur},
+    {"cre10", cre10},
+    {"synCG", synCG},
+    {"twistX", twistX},
+    {"nebCor", nebCor}
+  };
 
 UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
   fModelType(mt),
@@ -276,6 +286,9 @@ UF23Field::UF23Field(const ModelType mt, const double maxRadiusInKpc) :
   fTanPitch = tan(fDiskPitch);
 
 }
+
+UF23Field::UF23Field(const std::string name, const double maxRadiusInKpc) :
+  UF23Field(fModelTypes.at(name), maxRadiusInKpc) {}
 
 Vector3
 UF23Field::operator()(const Vector3& posInKpc)

@@ -77,6 +77,8 @@ public:
      @param maxRadiusInKpc maximum radius of field in kpc
   */
   UF23Field(const ModelType mt, const double maxRadiusInKpc = 30);
+  UF23Field(const std::string modelname, const double maxRadiusInKpc = 30);
+
   /// no default constructor
   UF23Field() = delete;
   /**
@@ -154,5 +156,6 @@ private:
   Vector3 GetTwistedHaloField(const double x, const double y, const double z) const;
 
   static const std::map<ModelType, std::string> fModelNames;
+  static const std::map<std::string, ModelType> fModelTypes;
 };
 #endif
