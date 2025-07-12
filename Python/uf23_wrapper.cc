@@ -7,7 +7,8 @@ namespace py = pybind11;
 
 class PyUF23 {
 public:
-  PyUF23(const std::string& model) : field(model) {}
+  PyUF23(const std::string& model, const double maxR = 30) :
+    field(model, maxR) {}
 
   std::tuple<double, double, double>
   get_field(double x, double y, double z)
@@ -44,7 +45,7 @@ PYBIND11_MODULE(uf23, m) {
     m.doc() = "UF23 Galactic Magnetic Field Python bindings";
 
     py::class_<PyUF23>(m, "UF23")
-        .def(py::init<const std::string&>())
+      .def(py::init<const std::string&, const double>(), py::arg("model"), py::arg("maxR") = 30.0)
         .def("get_field", &PyUF23::get_field, "Evaluate B field at a single point")
         .def("get_field_many", &PyUF23::get_field_many, "Evaluate B field at many points (Nx3 numpy array)");
 }
