@@ -530,13 +530,13 @@ UF23Field::GetSpiralField(const double x, const double y, const double z)
   const
 {
   // reference radius
-  const double rRef = 5*utl::kpc;
+  constexpr double rRef = 5*utl::kpc;
   // inner boundary of spiral field
-  const double rInner = 5*utl::kpc;
-  const double wInner = 0.5*utl::kpc;
+  constexpr double rInner = 5*utl::kpc;
+  constexpr double wInner = 0.5*utl::kpc;
   // outer boundary of spiral field
-  const double rOuter = 20*utl::kpc;
-  const double wOuter = 0.5*utl::kpc;
+  constexpr double rOuter = 20*utl::kpc;
+  constexpr double wOuter = 0.5*utl::kpc;
 
   // cylindrical coordinates
   const double r2 = x*x + y*y;
@@ -551,8 +551,12 @@ UF23Field::GetSpiralField(const double x, const double y, const double z)
   // Eq.(14) times rRef divided by r
   const double rFacI = utl::Sigmoid(r, rInner, wInner);
   const double rFacO = 1 - utl::Sigmoid(r, rOuter, wOuter);
-  // (using lim r--> 0 (1-exp(-r^2))/r --> r - r^3/2 + ...)
-  const double rFac =  r > 1e-5*utl::pc ? (1-exp(-r*r)) / r : r * (1 - r2/2);
+  constexpr double rScale = 1*utl::kpc;
+  const double rho = r / rScale;
+  // using lim rho-->0 (1-exp(-rho^2))/r = r/rScale^2 * (1 - rho^2/2 + ...)
+  const double rFac = rho > 1e-8 ?
+    (1 - exp(-rho*rho)) / r :
+    r/(rScale*rScale) * (1 - rho*rho/2);
   const double gdrTimesRrefByR = rRef * rFac * rFacO * rFacI;
 
   // Eq. (12)
