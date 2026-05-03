@@ -37,7 +37,8 @@ namespace utl {
   double
   DeltaPhi(const double phi0, const double phi1)
   {
-    return acos(cos(phi1)*cos(phi0) + sin(phi1)*sin(phi0));
+    const double c = cos(phi1)*cos(phi0) + sin(phi1)*sin(phi0);
+    return acos(std::max(-1.0, std::min(1.0, c)));
   }
 
   constexpr double kPi = 3.1415926535897932384626;
@@ -540,9 +541,10 @@ UF23Field::GetSpiralField(const double x, const double y, const double z)
 
   // cylindrical coordinates
   const double r2 = x*x + y*y;
-  if (r2 == 0)
-    return Vector3(0, 0, 0);
   const double r = sqrt(r2);
+  if (r < std::numeric_limits<double>::min())
+    return Vector3(0, 0, 0);
+
   const double phi = atan2(y, x);
 
   // Eq.(13)
