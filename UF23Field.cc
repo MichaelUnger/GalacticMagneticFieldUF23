@@ -652,5 +652,5 @@ double
 UF23Field::GetMaximumSquaredRadius()
   const
 {
-  return fMaxRadiusSquared / utl::kpc;
+  return fMaxRadiusSquared / (utl::kpc * utl::kpc);
 }
